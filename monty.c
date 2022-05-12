@@ -122,5 +122,6 @@ int main(int argc, char **argv)
 	free(string);
 	free_stack(&stack);
 	fclose(file);
-	exit(EXIT_SUCCESS);
+
+	return (0);
 }
