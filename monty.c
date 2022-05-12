@@ -36,6 +36,8 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	/* Read file line by line */
+	if (read_c == EOF)
+		exit(EXIT_FAILURE);
 	while (read_c != EOF)
 	{
 		token = 1;
