@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 			continue;
 
 		/* Parse the first elements of the line */
-		opcode = strtok(string, " \t\n"), num_str = strtok(NULL, " \t\n");
+		opcode = strtok(string, " \t\n");
 
 		/* If string is empty, let's continue */
 		if (opcode == NULL)
