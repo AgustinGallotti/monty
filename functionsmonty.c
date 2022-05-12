@@ -1,6 +1,7 @@
 #define _GNU_SOURCE
 #include "main.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
 * push - push a vlaue in the stack
@@ -20,23 +21,23 @@ void push(stack_t **top, stack_t **bot, int val, int mode)
 		exit(EXIT_FAILURE, NULL, *top);
 	}
 	pointer->n = val;
-	if (*top == NUL)
+	if (*top == NULL)
 	{
-		poniter->prev = NULL;
+		pointer->prev = NULL;
 		pointer->next = NULL;
 		*top = pointer;
 		*bot = pointer;
 	}
 	else if (mode == STACKMODE)
 	{
-		poniter->next = NULL;
-		poniter->prev = *top;
+		pointer->next = NULL;
+		pointer->prev = *top;
 		(*top)-next = pointer;
 		*top = pointer;
 	}
 	else if (mode == QUEUEMODE)
 	{
-		poniter->prev = NULL;
+		pointer->prev = NULL;
 		pointer->next = *bot;
 		(*bot)->prev = pointer;
 		*bot = pointer;
@@ -108,12 +109,12 @@ void swap(stack_t **top, stack_t **bot)
 
 	if (pointer == NULL || pointer->prev == NULL)
 		exit(EXIT_FAILURE, "can't swap, stack too short", *top);
-	poiner = pointer->prev;
+	pointer = pointer->prev;
 	(*top)->prev = pointer->prev;
 	pointer->next = (*top)->next;
 	pointer->prev = *top;
 	(*top)->next = pointer;
 	*top = pointer;
 	if ((*bot)->prev != NULL)
-		*bot = (*bot)-> prev;
+		*bot = (*bot)->prev;
 }

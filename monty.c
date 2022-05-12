@@ -2,6 +2,7 @@
 #include "main.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define MONTY 14
 
@@ -34,22 +35,23 @@ int main(int argc, char *argv[])
 	return (0);
 }
 /**
-* exitmon - free and exit program
+* exit - free and exit program
+*
 * @exitcod: exit code
 * @exitstr: exit and error
 * @topstack: free the stack
 */
-void exitmonty(int exitcod, char *exitstr, stack_t *topstack)
+void exit(int exitcod, char *exitstr, stack_t *top)
 {
-	stack_t *pointer = topstack;
+	stack_t *pointer = top;
 
 	if (exitstr != NULL)
 		printf("L%lu: %s\n", stat.line, exitstr);
 	while (top != NULL)
 	{
-		pointer = topstack->prev;
-		free(topstack);
-		topstack = pointer;
+		pointer = top->prev;
+		free(top);
+		top = pointer;
 	}
 	free(stat.buffer);
 	fclose(stat.script);

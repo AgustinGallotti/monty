@@ -1,3 +1,12 @@
+#ifndef MONTYH
+#define MONTYH
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define STACKMODE 0
+#define QUEUEMODE 1
+
 /**
 * struct stack_s - doubly linked list representation of a stack (or queue)
 * @n: integer
@@ -35,10 +44,16 @@ typedef struct stat
 	unsigned long line;
 	FILE* script;
 } stat;
-/*with this buffer we can create an read a line with an script and asign memory*/
 
-typedef struct optype
-{
-  char *opcode;
-  union funcstypes funcs; /*Unions only allocate at the same space */
-} optype;
+void pop(stack_t **top);
+void swap(stack_t **top, stack_t **bot);
+void push(stack_t **top, stack_t **bot, int val, int mode);
+
+void pall(stack_t **top);
+void pint(stack_t **top);
+
+void add(stack_t **top);
+
+void exit(int exitcod, char *exitstr, stack_t *top);
+
+#endif
