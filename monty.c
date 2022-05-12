@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 
 	filename = argv[1];
 	/* Open File with the bytecodes */
-	file = fopen(argv[1], "r");
+	file = fopen(filename, "r");
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
