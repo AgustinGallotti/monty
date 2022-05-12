@@ -1,13 +1,12 @@
 #include "monty.h"
 
 /**
- * add - This function adds the top two nodes of the stack, stores it in
- * the second node, and pops off the top node
- * @stack: The stack list
- * @line_number: The line number of the file
- * Return: The edited stack
- */
-
+* add - This function adds the top two nodes of the stack, stores it in
+* the second node, and pops off the top node
+* @stack: The stack list
+* @line_number: The line number of the file
+* Return: The edited stack
+*/
 stack_t *add(stack_t **stack, unsigned int line_number)
 {
 	int sum = 0;
@@ -32,12 +31,11 @@ line_number);
 }
 
 /**
- * pint - This function prints the integer of the head
- * @stack: Pointer to the stack
- * @line_number: Line number of the file
- * Return: Pointer to the stack
- */
-
+* pint - This function prints the integer of the head
+* @stack: Pointer to the stack
+* @line_number: Line number of the file
+* Return: Pointer to the stack
+*/
 stack_t *pint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *head;
@@ -56,12 +54,11 @@ stack_t *pint(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * pop - This function deletes the node at the top of the stack
- * @stack: Pointer to the stack
- * @line_number: Line number of the file
- * Return: Pointer to the stack
- */
-
+* pop - This function deletes the node at the top of the stack
+* @stack: Pointer to the stack
+* @line_number: Line number of the file
+* Return: Pointer to the stack
+*/
 stack_t *pop(stack_t **stack, unsigned int line_number __attribute__((unused)))
 {
 	/* Head points to head of stack */
@@ -90,11 +87,11 @@ stack_t *pop(stack_t **stack, unsigned int line_number __attribute__((unused)))
 }
 
 /**
- * swap - swaps the top two elements of the stack
- * @stack: ponter to the list stack
- * @line_number: unused variable
- * Return: the address of the first node
- */
+* swap - swaps the top two elements of the stack
+* @stack: ponter to the list stack
+* @line_number: unused variable
+* Return: the address of the first node
+*/
 stack_t *swap(stack_t **stack,
 	      unsigned int line_number __attribute__((unused)))
 {
@@ -121,12 +118,11 @@ stack_t *swap(stack_t **stack,
 }
 
 /**
- * nop - This function does nothing
- * @stack: Pointer to the stack
- * @line_number: Line number of file
- * Return: Pointer to the stack
- */
-
+* nop - This function does nothing
+* @stack: Pointer to the stack
+* @line_number: Line number of file
+* Return: Pointer to the stack
+*/
 stack_t *nop(stack_t **stack __attribute__ ((unused)),
 	  unsigned int line_number __attribute__((unused)))
 {
