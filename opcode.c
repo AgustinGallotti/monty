@@ -22,7 +22,7 @@ stack_t *(*op_func(char *s, stack_t **stack, unsigned int line_number))(stack_t 
 	char *opcode;
 	int i = 0;
 
-	while (i < 14)
+	while (i < 7)
 	{
 		opcode = (ops[i]).opcode;
 		/* if the opcode is in the list */
@@ -37,5 +37,4 @@ stack_t *(*op_func(char *s, stack_t **stack, unsigned int line_number))(stack_t 
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, s);
 	free_stack(stack);
 	exit(EXIT_FAILURE);
-
 }
