@@ -27,9 +27,8 @@ int main(int argc, char **argv)
 	}
 
 	filename = argv[1];
-
 	/* Open File with the bytecodes */
-	file = fopen(filename, "r");
+	file = fopen(argv[1], "r");
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
@@ -49,6 +48,7 @@ int main(int argc, char **argv)
 		read_c = getline(&string, &nbytes, file);
 		if (read_c == -1)
 		{
+			fprintf(stderr, "Error: malloc failed\n");
 			free(string);
 			if (stack != NULL)
 				free_stack(&stack);
@@ -124,6 +124,5 @@ int main(int argc, char **argv)
 	free(string);
 	free_stack(&stack);
 	fclose(file);
-
-	return (0);
+	exit(EXIT_SUCCESS);
 }
