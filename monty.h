@@ -23,6 +23,26 @@ typedef struct stack_s
         struct stack_s *next;
 } stack_t;
 
+union montyfunctype
+{
+	void (*toponly)(stack_t **top);
+	void (*pushmode)(stack_t **top, stack_t **bot, int val, int mode);
+	void (*topbot)(stack_t **top, stack_t **bot);
+};
+
+typedef struct montyglob
+{
+	char *buffer;
+	unsigned long linenum;
+	FILE* script;
+} montyglob;
+
+typedef struct optype
+{
+	char *opcode;
+	union montyfunctype func;
+} optype;
+
 /**
 * struct instruction_s - opcode and its function
 * @opcode: the opcode
@@ -38,12 +58,7 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-typedef struct stat
-{
-  char *buffer;
-	unsigned long line;
-	FILE* script;
-} stat;
+int main(int ac, char *av[]);
 
 void pop(stack_t **top);
 void swap(stack_t **top, stack_t **bot);
@@ -54,6 +69,6 @@ void pint(stack_t **top);
 
 void add(stack_t **top);
 
-void exit(int exitcod, char *exitstr, stack_t *top);
+void exitwrap(int exitcode, char *exitstring, stack_t *top);
 
 #endif

@@ -1,5 +1,5 @@
 #define _GNU_SOURCE
-#include "main.h"
+#include "monty.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,35 +12,35 @@
 */
 void push(stack_t **top, stack_t **bot, int val, int mode)
 {
-	stack_t *pointer;
+	stack_t *ptr;
 
-	pointer	= malloc(sizeof(stack_t));
-	if (pointer == NULL)
+	ptr	= malloc(sizeof(stack_t));
+	if (ptr == NULL)
 	{
 		printf("Error: malloc failed\n");
-		exit(EXIT_FAILURE, NULL, *top);
+		exitwrap(EXIT_FAILURE, NULL, *top);
 	}
-	pointer->n = val;
+	ptr->n = val;
 	if (*top == NULL)
 	{
-		pointer->prev = NULL;
-		pointer->next = NULL;
-		*top = pointer;
-		*bot = pointer;
+		ptr->prev = NULL;
+		ptr->next = NULL;
+		*top = ptr;
+		*bot = ptr;
 	}
 	else if (mode == STACKMODE)
 	{
-		pointer->next = NULL;
-		pointer->prev = *top;
-		(*top)-next = pointer;
-		*top = pointer;
+		ptr->next = NULL;
+		ptr->prev = *top;
+		(*top)->next = ptr;
+		*top = ptr;
 	}
 	else if (mode == QUEUEMODE)
 	{
-		pointer->prev = NULL;
-		pointer->next = *bot;
-		(*bot)->prev = pointer;
-		*bot = pointer;
+		ptr->prev = NULL;
+		ptr->next = *bot;
+		(*bot)->prev = ptr;
+		*bot = ptr;
 	}
 }
 
@@ -51,12 +51,12 @@ void push(stack_t **top, stack_t **bot, int val, int mode)
 */
 void pall(stack_t **top)
 {
-	stack_t *pointer = *top;
+	stack_t *ptr = *top;
 
-	while (pointer != NULL)
+	while (ptr != NULL)
 	{
-		printf("%d\n", pointer->n);
-		pointer = pointer->prev;
+		printf("%d\n", ptr->n);
+		ptr = ptr->prev;
 	}
 }
 
@@ -68,32 +68,32 @@ void pall(stack_t **top)
 void pint(stack_t **top)
 {
 	if (top == NULL)
-		exit(EXIT_FAILURE, "can´t pint, stack empty", *top);
-	printf("d%\n", (*top)->n);
+		exitwrap(EXIT_FAILURE, "can't pint, stack empty", *top);
+	printf("%d\n", (*top)->n);
 }
 
 /**
+* pop - funciton to top element
 *
-*
-*
+* @top: top of stack
 */
 void pop(stack_t **top)
 {
-	stack_t *pointer = *top;
+	stack_t *ptr = *top;
 
-	if (pointer == NULL)
-		exit(EXIT_FAILURE, "can't pop an empty stack", *top);
-	if (pointer->prev == NULL)
+	if (ptr == NULL)
+		exitwrap(EXIT_FAILURE, "can't pop an empty stack", *top);
+	if (ptr->prev == NULL)
 	{
 		free(*top);
 		*top = NULL;
 	}
 	else
 	{
-		pointer = pointer->prev;
-		pointer->next = NULL;
+		ptr = ptr->prev;
+		ptr->next = NULL;
 		free(*top);
-		*top = pointer;
+		*top = ptr;
 	}
 }
 
@@ -108,7 +108,7 @@ void swap(stack_t **top, stack_t **bot)
 	stack_t *pointer = *top;
 
 	if (pointer == NULL || pointer->prev == NULL)
-		exit(EXIT_FAILURE, "can't swap, stack too short", *top);
+		exitwrap(EXIT_FAILURE, "can't swap, stack too short", *top);
 	pointer = pointer->prev;
 	(*top)->prev = pointer->prev;
 	pointer->next = (*top)->next;

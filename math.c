@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,18 +9,18 @@
 */
 void add(stack_t **top)
 {
-	stack_t *pointer = *top;
+	stack_t *ptr = *top;
 	long num;
 
-	if (pointer == NULL || pointer->prev == NULL)
-		exit(EXIT_FAILURE, "can't add, stack to short", *top);
+	if (ptr == NULL || ptr->prev == NULL)
+		exitwrap(EXIT_FAILURE, "can't add, stack to short", *top);
 	else
 	{
-		num = pointer->n;
-		pointer = pointer->prev;
-		pointer->next = NULL;
+		num = ptr->n;
+		ptr = ptr->prev;
+		ptr->next = NULL;
 		free(*top);
-		*top = pointer;
-		pointer->n += num;
+		*top = ptr;
+		ptr->n += num;
 	}
 }
