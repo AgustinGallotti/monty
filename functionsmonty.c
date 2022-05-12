@@ -1,5 +1,5 @@
 #define _GNU_SOURCE
-#include "monty.h"
+#include "main.h"
 #include <stdio.h>
 
 /**
