@@ -58,5 +58,6 @@ stack_t *(*op_func(char *s, stack_t **stack,
        unsigned int line_number))(stack_t **stack,
                       unsigned int line_number);
 stack_t *pint(stack_t **stack, unsigned int line_number);
+stack_t *swap(stack_t **stack, unsigned int line_number);
 
 #endif /* _MONTY_H_ */
