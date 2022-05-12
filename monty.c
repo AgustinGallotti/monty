@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 
 	/* Open File with the bytecodes */
 	file = fopen(filename, "r");
-	if (file == NULL)
+	if (file == NULL || !file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
@@ -66,11 +66,14 @@ int main(int argc, char **argv)
 			continue;
 
 		/* Parse the first elements of the line */
-		opcode = strtok(string, " \n");
+		opcode = strtok(string, " \t\n");
 
 		/* If string is empty, let's continue */
 		if (opcode == NULL)
+		{
+			nop(&stack, line_num);
 			continue;
+		}
 
 		if (opcode[0] == '#')
 		{
