@@ -48,6 +48,7 @@ typedef struct instruction_s
 
 /* Prototypes */
 
+int main(int argc, char **argv);
 stack_t *nop(stack_t **stack, unsigned int line_number);
 stack_t *pop(stack_t **stack, unsigned int line_number);
 stack_t *push(stack_t **stack, unsigned int line_number);
