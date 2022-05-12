@@ -70,3 +70,50 @@ void pint(stack_t **top)
 		exit(EXIT_FAILURE, "can´t pint, stack empty", *top);
 	printf("d%\n", (*top)->n);
 }
+
+/**
+*
+*
+*
+*/
+void pop(stack_t **top)
+{
+	stack_t *pointer = *top;
+
+	if (pointer == NULL)
+		exit(EXIT_FAILURE, "can't pop an empty stack", *top);
+	if (pointer->prev == NULL)
+	{
+		free(*top);
+		*top = NULL;
+	}
+	else
+	{
+		pointer = pointer->prev;
+		pointer->next = NULL;
+		free(*top);
+		*top = pointer;
+	}
+}
+
+/**
+* swap - swap to values on stack
+*
+* @top: top of the stack
+* @bot: bottom of stack
+*/
+void swap(stack_t **top, stack_t **bot)
+{
+	stack_t *pointer = *top;
+
+	if (pointer == NULL || pointer->prev == NULL)
+		exit(EXIT_FAILURE, "can't swap, stack too short", *top);
+	poiner = pointer->prev;
+	(*top)->prev = pointer->prev;
+	pointer->next = (*top)->next;
+	pointer->prev = *top;
+	(*top)->next = pointer;
+	*top = pointer;
+	if ((*bot)->prev != NULL)
+		*bot = (*bot)-> prev;
+}
