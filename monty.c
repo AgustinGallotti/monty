@@ -45,6 +45,7 @@ int main(int argc, char **argv)
 			free(string);
 		string = NULL;
 
+		if (file != NULL)
 		read_c = getline(&string, &nbytes, file);
 
 		if (read_c == -1)
