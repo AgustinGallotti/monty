@@ -35,7 +35,6 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
-
 	/* Read file line by line */
 	while (read_c != EOF)
 	{
@@ -45,9 +44,7 @@ int main(int argc, char **argv)
 			free(string);
 		string = NULL;
 
-		if (file != NULL)
 		read_c = getline(&string, &nbytes, file);
-
 		if (read_c == -1)
 		{
 			free(string);
