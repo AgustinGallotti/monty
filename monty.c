@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 	char *string = NULL, *opcode, *num_str;
 	size_t nbytes = 1;
 	FILE *file;
-	unsigned int line_num = 1, i = 0;
+	unsigned int line_num = 0, i = 0;
 	ssize_t read_c = 0;
 	stack_t *stack;
 
