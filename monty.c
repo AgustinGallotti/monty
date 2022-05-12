@@ -36,7 +36,6 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	/* Read file line by line */
-
 	while (read_c != EOF)
 	{
 		token = 1;
@@ -46,8 +45,6 @@ int main(int argc, char **argv)
 		string = NULL;
 
 		read_c = getline(&string, &nbytes, file);
-		if (read_c == EOF)
-			break;
 		if (read_c == -1)
 		{
 			free(string);
@@ -87,7 +84,7 @@ int main(int argc, char **argv)
 		/* Check whether the first token is the opcode 'push' */
 		if (strcmp(opcode, "push") == 0)
 		{
-			num_str = strtok(NULL, " \n");
+			num_str = strtok(NULL, " \t\n");
 
 			/* Check if token is a digit or NULL */
 			if (num_str == NULL)
