@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 	char *string = NULL, *opcode, *num_str;
 	size_t nbytes = 1;
 	FILE *file;
-	unsigned int line_num = 0, i = 0;
+	unsigned int line_num = 0, i = 0, flag = 0;
 	ssize_t read_c = 0;
 	stack_t *stack;
 
@@ -63,18 +63,15 @@ int main(int argc, char **argv)
 		/* Continue if line had only the new line character */
 		if (read_c == 1)
 			continue;
+		/* flags */
+		if (read_c == 3)
+			flag++;
 
 		/* Parse the first elements of the line */
 		opcode = strtok(string, " \t\n");
 
 		/* If string is empty, let's continue */
-		if (opcode == NULL)
-		{
-			nop(&stack, line_num);
-			continue;
-		}
-
-		if (opcode[0] == '#')
+		if (opcode == NULL || opcode[0] == '#')
 		{
 			nop(&stack, line_num);
 			continue;
