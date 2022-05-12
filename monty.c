@@ -36,6 +36,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	/* Read file line by line */
+
 	while (read_c != EOF)
 	{
 		token = 1;
@@ -45,6 +46,8 @@ int main(int argc, char **argv)
 		string = NULL;
 
 		read_c = getline(&string, &nbytes, file);
+		if (read_c == EOF)
+			break;
 		if (read_c == -1)
 		{
 			free(string);
@@ -66,7 +69,7 @@ int main(int argc, char **argv)
 			continue;
 
 		/* Parse the first elements of the line */
-		opcode = strtok(string, " \t\n");
+		opcode = strtok(string, " \t\n"), num_str = strtok(NULL, " \t\n");
 
 		/* If string is empty, let's continue */
 		if (opcode == NULL)
