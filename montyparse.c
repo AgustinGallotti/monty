@@ -2,48 +2,18 @@
 #include "monty.h"
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 
-#define MONTYOPCT 14
+#define MONTYOPCT 6
 
 static montyglob mglob;
 
 /**
-* main - function main
-*
-* @argc: number of agguments
-* @argv: argument array
-*
-* Return: succes EXIT_SUCCESS or error EXIT_FAILURE
-*/
-int main(int ac, char *av[])
-{
-	optype *ops;
-
-	if (ac != 2)
-	{
-		printf("USAGE: monty file\n");
-		return (EXIT_FAILURE);
-	}
-	mglob.script = fopen(av[1], "r");
-	if (mglob.script == NULL)
-	{
-		printf("Error: Can't open file %s\n", av[1]);
-		return (EXIT_FAILURE);
-	}
-	ops = initops();
-	mglob.linenum = 1;
-	montyparse(ops);
-	return (0);
-}
-
-/**
-* exitwrap - free and exit program
-*
-* @exitcode: exit code
-* @exitstring: exit and error
-* @top: free the stack
-*/
+ * exitwrap - free things and exit the program. Print error message as needed
+ *
+ * @exitcode: exit code
+ * @exitstring: error string to print, if any
+ * @top: top of stack (for freeing)
+ */
 void exitwrap(int exitcode, char *exitstring, stack_t *top)
 {
 	stack_t *ptr = top;
@@ -60,6 +30,29 @@ void exitwrap(int exitcode, char *exitstring, stack_t *top)
 	fclose(mglob.script);
 	exit(exitcode);
 }
+
+/**
+ * isnumstr - checks if a string is a number
+ *
+ * @str: string to check
+ *
+ * Return: 1 if numeric, 0 otherwise
+ */
+int isnumstr(char *str)
+{
+	if (*str == '-')
+	{
+		str++;
+		if (*str < '0' || *str > '9')
+			return (0);
+		str++;
+	}
+	while (*str != 0)
+		if (*str < '0' || *str++ > '9')
+			return (0);
+	return (1);
+}
+
 /**
  * montyparse - parser for monty script files
  * note that bot is updated to NULL only in the case of pushing with
@@ -67,7 +60,7 @@ void exitwrap(int exitcode, char *exitstring, stack_t *top)
  * first.
  *
  * @ops: array of opcodes and pointers to functions for them
- *
+ :x
  * Return: 0 if successful
  */
 int montyparse(optype *ops)
@@ -131,42 +124,51 @@ int montyparse(optype *ops)
  */
 optype *initops()
 {
-	static optype head[14];
+	static optype head[6];
 
 	head[0].opcode = "push";
 	head[0].func.pushmode = push;
-	head[3].opcode = "swap";
-	head[3].func.topbot = swap;
-	head[4].opcode = "pop";
-	head[4].func.toponly = pop;
-	head[5].opcode = "pall";
-	head[5].func.toponly = pall;
-	head[6].opcode = "pint";
-	head[6].func.toponly = pint;
-	head[9].opcode = "add";
-	head[9].func.toponly = add;
+	head[1].opcode = "swap";
+	head[1].func.topbot = swap;
+	head[2].opcode = "pop";
+	head[2].func.toponly = pop;
+	head[3].opcode = "pall";
+	head[3].func.toponly = pall;
+	head[4].opcode = "pint";
+	head[4].func.toponly = pint;
+	head[5].opcode = "add";
+	head[5].func.toponly = add;
 
 	return (head);
 }
 
 /**
- * isnumstr - checks if a string is a number
+ * main - parse a monty script file
  *
- * @str: string to check
+ * @ac: number of arguments
+ * @av: argument array
  *
- * Return: 1 if numeric, 0 otherwise
+ * Return: EXIT_SUCCESS on success, EXIT_FAILURE otherwise
  */
-int isnumstr(char *str)
+int main(int ac, char *av[])
 {
-	if (*str == '-')
+	optype *ops;
+
+	if (ac != 2)
 	{
-		str++;
-		if (*str < '0' || *str > '9')
-			return (0);
-		str++;
+		printf("USAGE: monty file\n");
+		return (EXIT_FAILURE);
 	}
-	while (*str != 0)
-		if (*str < '0' || *str++ > '9')
-			return (0);
-	return (1);
+	mglob.script = fopen(av[1], "r");
+	if (mglob.script == NULL)
+	{
+		printf("Error: Can't open file %s\n", av[1]);
+		return (EXIT_FAILURE);
+	}
+	ops = initops();
+	mglob.linenum = 1;
+	montyparse(ops);
+	return (0);
 }
+
+#undef MONTYOPCT
