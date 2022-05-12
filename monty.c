@@ -46,7 +46,6 @@ int main(int argc, char **argv)
 		read_c = getline(&string, &nbytes, file);
 		if (read_c == -1)
 		{
-			fprintf(stderr, "Error: malloc failed\n");
 			free(string);
 			if (stack != NULL)
 				free_stack(&stack);
