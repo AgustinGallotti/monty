@@ -94,7 +94,7 @@ int montyparse(optype *ops)
 				{
 					tok = strtok(NULL, "\n ");
 					if (tok == NULL || !isnumstr(tok))
-						exitwrap(EXIT_FAILURE, "usage: push integer", top);
+						exitwrap(EXIT_FAILURE, "L%d: usage: push integer", top);
 					ops[0].func.pushmode(&top, &bot, atoi(tok), mode);
 				}
 				else if (val < 4)
