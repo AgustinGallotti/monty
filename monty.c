@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 
 	/* Open File with the bytecodes */
 	file = fopen(filename, "r");
-	if (file == NULL || !file)
+	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
