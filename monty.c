@@ -109,7 +109,6 @@ int main(int argc, char **argv)
 					exit(EXIT_FAILURE);
 				}
 			}
-
 			token = atoi(num_str);
 		}
 		op_func(opcode, &stack, line_num)(&stack, line_num);
