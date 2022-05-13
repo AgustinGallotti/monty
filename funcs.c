@@ -13,7 +13,7 @@ stack_t *add(stack_t **stack, unsigned int line_number)
 	stack_t *head = *stack;
 
 	/* Check if stack is NULL */
-	if (!head || !head->next)
+	if (head == NULL || head->next == NULL)
 	{
 		/* Print error, free, and exit */
 		fprintf(stderr, "L%d: can't add, stack too short\n",
