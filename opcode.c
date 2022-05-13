@@ -17,12 +17,13 @@ stack_t *(*op_func(char *s, stack_t **stack, unsigned int line_number))(stack_t 
 		{"pint", pint},
 		{"pop", pop},
 		{"add", add},
+		{"swap", swap},
 		{NULL, NULL}
 	};
 	char *opcode;
 	int i = 0;
 
-	while (i < 7)
+	while (i < 8)
 	{
 		opcode = (ops[i]).opcode;
 		/* if the opcode is in the list */
