@@ -111,10 +111,7 @@ stack_t *pstr(stack_t **stack,
 	while (head)
 	{
 		if (head->n < 32 || head->n > 127)
-		{
-			free(head);
 			break;
-		}
 		putchar(head->n);
 		head = head->next;
 	}
