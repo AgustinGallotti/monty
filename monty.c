@@ -1,6 +1,4 @@
 #include "monty.h"
-
-/* Initialize the global variable */
 int token = 1;
 
 /**

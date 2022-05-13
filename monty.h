@@ -11,9 +11,6 @@
 #include <string.h>
 #include <ctype.h>
 
-/* Declaration of the global variables */
-extern int token;
-
 /* structures */
 
 /**
@@ -45,6 +42,9 @@ typedef struct instruction_s
 	char *opcode;
 	stack_t *(*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/* my calls of global tok */
+extern int token;
 
 /* Prototypes */
 
